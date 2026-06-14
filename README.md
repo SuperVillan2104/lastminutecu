@@ -1,20 +1,36 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# Last Minute CU
 
-# Run and deploy your AI Studio app
+Welcome to **Last Minute CU** - Your ultimate solution for last-minute planning and decision-making!
 
-This contains everything you need to run your app locally.
+🌐 **Live Website**: [https://lastminutecu.netlify.app/](https://lastminutecu.netlify.app/)
 
-View your app in AI Studio: https://ai.studio/apps/31a29904-8dd3-4ffd-bc2d-2b8e9749b201
+## ✨ Features
 
-## Run Locally
+- **Home** - Get started with an intuitive homepage introducing our platform
+- **About Us** - Learn more about Last Minute CU and our mission
+- **Services** - Explore the wide range of services we offer
+- **Contact Us** - Reach out to our team with any questions or inquiries
+- **AI-Powered Assistance** - Get intelligent recommendations using Google's Gemini API
+- **Responsive Design** - Works seamlessly across all devices
+- **Fast & Modern** - Built with the latest web technologies for optimal performance
 
-**Prerequisites:**  Node.js
+## 🚀 Quick Start
 
+Visit [https://lastminutecu.netlify.app/](https://lastminutecu.netlify.app/) to access the website directly - no installation needed!
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## 🛠️ For Developers
+
+To run this project locally:
+
+```bash
+npm install
+npm run dev
+```
+
+## 📞 Contact
+
+Have questions? Visit our [Contact Us](https://lastminutecu.netlify.app/contact.html) page or reach out to our team.
+
+---
+
+**Deployed on Netlify** | Built with React, Vite, and Tailwind CSS
