@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Study Cabin | LastMinute — High-Yield Interactive Cram Cockpit</title>
+    <!-- Master styled files compiled by Vite -->
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body class="min-h-screen bg-brand-surface font-sans text-brand-dark flex flex-col antialiased">
+    
+    <!-- Router-specific identifier for script initialization -->
+    <div id="view-services-indicator" class="hidden"></div>
+
+    <!-- DYNAMIC COUNTDOWN BANNER -->
+    <div id="countdown-banner" class="bg-black text-white w-full py-2 px-4 text-center border-b border-zinc-900 sticky top-0 z-50">
+      <span class="font-mono text-[11px] tracking-widest uppercase flex items-center justify-center gap-2">
+        <svg class="w-3.5 h-3.5 text-brand-yellow inline animate-pulse" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path>
+          <line x1="12" y1="9" x2="12" y2="13"></line>
+          <line x1="12" y1="17" x2="12.01" y2="17"></line>
+        </svg>
+        <span id="banner-text">T-MINUS 47:59:58 UNTIL EXAM DEADLINE</span>
+      </span>
+    </div>
+
+    <!-- NAVIGATION HEADER -->
+    <header class="bg-white/95 backdrop-blur-md border-b border-zinc-200 h-16 w-full shadow-xs sticky top-9 z-40">
+      <div class="flex justify-between items-center max-w-[1120px] mx-auto px-4 sm:px-6 md:px-8 h-full">
+        <!-- Logo -->
+        <a href="index.html" id="nav-logo" class="font-display text-lg md:text-xl font-black text-brand-dark uppercase tracking-tighter flex items-center gap-2 hover:opacity-90">
+          <svg class="w-5.5 h-5.5 text-brand-yellow fill-brand-yellow shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+          </svg>
+          <span>LastMinute</span>
+        </a>
+
+        <!-- Desktop Navigation Menu -->
+        <nav class="hidden md:flex items-center gap-8 h-full">
+          <a href="index.html" class="h-full flex items-center font-display text-[12px] font-bold uppercase text-zinc-500 border-b-2 border-transparent hover:text-black transition-colors">Home</a>
+          <a href="about.html" class="h-full flex items-center font-display text-[12px] font-bold uppercase text-zinc-500 border-b-2 border-transparent hover:text-black transition-colors">Crew Story</a>
+          <a href="services.html" class="h-full flex items-center font-display text-[12px] font-extrabold uppercase relative px-1 border-b-2 text-brand-yellow-hover border-brand-yellow">Study Cabin</a>
+          <a href="contact.html" class="h-full flex items-center font-display text-[12px] font-bold uppercase text-zinc-500 border-b-2 border-transparent hover:text-black transition-colors">Get Help</a>
+        </nav>
+
+        <!-- CTA Action -->
+        <div class="hidden md:block">
+          <button onclick="launchInteractiveCockpit()" class="font-display text-xs font-black uppercase px-5 py-2.5 border-2 border-black bg-brand-yellow text-black hover:bg-brand-yellow-hover transition-all active:scale-97 flex items-center gap-2 cursor-pointer shadow-sm">
+            <span>Launch Cockpit</span>
+            <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </button>
+        </div>
+
+        <!-- Mobile Drawer Menu Toggle -->
+        <div class="flex md:hidden items-center gap-2">
+          <button onclick="launchInteractiveCockpit()" class="bg-brand-yellow text-black font-display font-black text-[11px] uppercase border border-black px-3.5 py-1.5 active:scale-95 shadow-sm">Cram</button>
+          <button id="mobile-menu-toggle" class="text-black p-2 border border-zinc-200 focus:outline-none cursor-pointer rounded-none" aria-label="Toggle menu">
+            <svg id="menu-icon-hamburger" class="w-5 h-5 block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            <svg id="menu-icon-close" class="w-5 h-5 hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- MOBILE DRAWER CONTAINER -->
+    <div id="mobile-drawer" class="hidden md:hidden bg-white border-b border-zinc-200 w-full py-5 px-6 flex flex-col gap-4 shadow-md absolute top-25 left-0 z-40 animate-fade-in">
+      <div class="flex flex-col gap-2">
+        <a href="index.html" class="font-display text-xs font-bold uppercase py-2.5 px-3 border-l-4 border-transparent text-zinc-505 hover:text-black">Home</a>
+        <a href="about.html" class="font-display text-xs font-bold uppercase py-2.5 px-3 border-l-4 border-transparent text-zinc-505 hover:text-black">Crew Story</a>
+        <a href="services.html" class="font-display text-xs font-black uppercase py-2.5 px-3 border-l-4 border-brand-yellow bg-zinc-50 text-black">Study Cabin</a>
+        <a href="contact.html" class="font-display text-xs font-bold uppercase py-2.5 px-3 border-l-4 border-transparent text-zinc-505 hover:text-black">Get Help</a>
+      </div>
+      <button onclick="launchInteractiveCockpit(); document.getElementById('mobile-drawer').classList.add('hidden');" class="w-full bg-brand-yellow text-black border-2 border-black font-display text-xs font-black py-4 uppercase text-center flex items-center justify-center gap-2 cursor-pointer transition-colors shadow-sm">
+        Enter Cram Cockpit 
+        <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+      </button>
+    </div>
+
+    <!-- MAIN INTERACTIVE SEGMENTS -->
+    <main class="flex-grow w-full">
+      
+      <!-- DEFAULT SERVICES OVERVIEW -->
+      <section id="services-default-overview" class="max-w-[1120px] mx-auto px-4 sm:px-6 md:px-8 py-16 md:py-24 animate-fade-in grid-bg">
+        <div class="max-w-[800px] mb-16">
+          <span class="inline-block bg-white text-zinc-650 px-4 py-1.5 border border-zinc-200 font-mono text-[10px] uppercase mb-6 tracking-widest font-bold shadow-xs">
+            STUDY DIVISIONS
+          </span>
+          <h1 class="font-display text-3xl sm:text-4xl md:text-5xl font-black text-black mb-6 tracking-tight uppercase leading-[0.95]">
+            Academic Focus Modules.
+          </h1>
+          <p class="font-sans text-sm sm:text-base md:text-[17px] text-zinc-600 max-w-[700px] leading-relaxed">
+            When time is a high-cost luxury, standard search routines won't save you. We filter core syllabus requirements directly into short-term recall configurations designed for immediate retention.
+          </p>
+        </div>
+
+        <!-- Layout Grids -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Card 1 -->
+          <div class="bg-white border-2 border-zinc-200 p-6 sm:p-8 flex flex-col gap-6 hover:border-black transition-all relative group rounded-none shadow-sm pb-10">
+            <div class="absolute top-0 left-0 w-full h-1.5 bg-zinc-200 group-hover:bg-brand-yellow transition-colors"></div>
+            <div class="flex justify-between items-start mt-2">
+              <svg class="w-9 h-9 text-brand-dark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><line x1="10" y1="9" x2="8" y2="9"></line></svg>
+              <span class="font-mono text-[9px] uppercase font-black tracking-wide bg-zinc-50 px-2.5 py-1 text-zinc-500 border border-zinc-200 rounded-none">MODULE 01</span>
+            </div>
+            
+            <div class="mt-2">
+              <h3 class="font-display text-base font-black uppercase text-black">Priority Invariants</h3>
+              <p class="font-mono text-[10px] text-zinc-400 font-bold block italic uppercase mt-1">"Reference laws & equations"</p>
+            </div>
+
+            <p class="font-sans text-xs sm:text-[13px] text-zinc-500 leading-relaxed">
+              Skip speculative academic chatter. Priority Invariants compiles definitions, rules, and mathematical bounds needed to secure core points, marked with probability ratings.
+            </p>
+
+            <button onclick="launchInteractiveCockpit()" class="mt-8 flex items-center justify-between font-display text-[10.5px] font-black uppercase text-black border-2 border-black bg-white px-4 py-3 hover:bg-brand-yellow transition-colors w-full cursor-pointer rounded-none active:scale-97 shadow-xs">
+              BROWSE NOTES INSTRUCTIONS
+              <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </button>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="bg-white border-2 border-zinc-200 p-6 sm:p-8 flex flex-col gap-6 hover:border-black transition-all relative group rounded-none shadow-sm pb-10">
+            <div class="absolute top-0 left-0 w-full h-1.5 bg-zinc-200 group-hover:bg-brand-yellow transition-colors"></div>
+            <div class="flex justify-between items-start mt-2">
+              <svg class="w-9 h-9 text-brand-dark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
+              <span class="font-mono text-[9px] uppercase font-black tracking-wide bg-zinc-50 px-2.5 py-1 text-zinc-500 border border-zinc-200 rounded-none">MODULE 02</span>
+            </div>
+            
+            <div class="mt-2">
+              <h3 class="font-display text-base font-black uppercase text-black">Expected Models</h3>
+              <p class="font-mono text-[10px] text-zinc-400 font-bold block italic uppercase mt-1">"Exempt paper replicates"</p>
+            </div>
+
+            <p class="font-sans text-xs sm:text-[13px] text-zinc-500 leading-relaxed">
+              Algorithmic indexing of previous exam queries. Get representative problems processed step-by-step alongside standard answers and specific warnings pointing out "trap criteria".
+            </p>
+
+            <button onclick="launchInteractiveCockpit()" class="mt-8 flex items-center justify-between font-display text-[10.5px] font-black uppercase text-black border-2 border-black bg-white px-4 py-3 hover:bg-brand-yellow transition-colors w-full cursor-pointer rounded-none active:scale-97 shadow-xs">
+              PRACTICE PAST REPLICAS
+              <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </button>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="bg-white border-2 border-zinc-200 p-6 sm:p-8 flex flex-col gap-6 hover:border-black transition-all relative group rounded-none shadow-sm pb-10">
+            <div class="absolute top-0 left-0 w-full h-1.5 bg-zinc-200 group-hover:bg-brand-yellow transition-colors"></div>
+            <div class="flex justify-between items-start mt-2">
+              <svg class="w-9 h-9 text-brand-dark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+              <span class="font-mono text-[9px] uppercase font-black tracking-wide bg-zinc-50 px-2.5 py-1 text-zinc-500 border border-zinc-200 rounded-none">MODULE 03</span>
+            </div>
+            
+            <div class="mt-2">
+              <h3 class="font-display text-base font-black uppercase text-black">Crisis Solace Cabin</h3>
+              <p class="font-mono text-[10px] text-zinc-400 font-bold block italic uppercase mt-1">"Anxiety buffering rooms"</p>
+            </div>
+
+            <p class="font-sans text-xs sm:text-[13px] text-zinc-500 leading-relaxed">
+              Retain chemical composure under critical stress schedules. Leverage digital Pomodoro timers configured for rapid intervals with built-in interactive guide mechanisms.
+            </p>
+
+            <button onclick="launchInteractiveCockpit()" class="mt-8 flex items-center justify-between font-display text-[10.5px] font-black uppercase text-black border-2 border-black bg-white px-4 py-3 hover:bg-brand-yellow transition-colors w-full cursor-pointer rounded-none active:scale-97 shadow-xs">
+              INITIALIZE INTERFACE ENGINE
+              <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Large CTA banner for services segment -->
+        <div class="border-2 border-black bg-brand-yellow text-black p-8 sm:p-12 md:p-16 flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mt-16 shadow-md rounded-none relative overflow-hidden">
+          <div class="max-w-[620px] relative z-10">
+            <span class="font-mono text-[9px] uppercase tracking-widest font-extrabold text-black block bg-black/10 px-2.5 py-1 w-max rounded-none mb-3">ACTIVATE COGNITIVE STACK</span>
+            <h2 class="font-display text-2xl sm:text-3xl font-black uppercase leading-tight">Ready to bypass standard lecture fatigue?</h2>
+            <p class="font-sans text-xs sm:text-sm text-stone-850 mt-2 leading-relaxed">
+              Launch our clean application cockpit to unlock all distilled formulas, questions, and automated breathing buffers for Operating Systems, Organic Chemistry, and Series Calculus.
+            </p>
+          </div>
+          <button onclick="launchInteractiveCockpit()" class="bg-black text-white hover:bg-neutral-800 font-display text-xs font-black uppercase tracking-wide py-4.5 px-8 border-2 border-black active:scale-95 transition-all text-center flex items-center gap-2 cursor-pointer shrink-0 shadow-md rounded-none relative z-10">
+            LAUNCH INTERACTIVE WORKSPACE
+            <svg class="w-4 h-4 text-brand-yellow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </button>
+          <!-- Vector backgrounds standard clean shape -->
+          <div class="absolute -right-10 -bottom-10 w-44 h-44 bg-black/5 rounded-full scale-150"></div>
+        </div>
+      </section>
+
+
+      <!-- ACTIVE LIVE SAAS WORKSPACE CABINET (Swap via launchInteractiveCockpit) -->
+      <section id="services-cabin-workspace" class="hidden w-full border-t border-zinc-200 bg-zinc-50 py-10 md:py-14 animate-fade-in">
+        <div class="max-w-[1120px] mx-auto px-4 sm:px-6 md:px-8 flex flex-col gap-6">
+          
+          <!-- Cockpit Header Controls toolbar -->
+          <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-white border-2 border-black p-4 sm:p-5 shadow-sm rounded-none">
+            <div class="flex items-center gap-3">
+              <span class="w-3 h-3 bg-red-650 rounded-full animate-ping"></span>
+              <div>
+                <h2 class="font-display text-sm font-black uppercase tracking-tight text-black block leading-[1.1]">LASTMINUTE LIVE WORKSPACE</h2>
+                <span id="cram-subject-name" class="font-mono text-[9px] text-zinc-500 uppercase font-black block mt-1">Active Subject: Operating Systems & CPU Scheduling</span>
+              </div>
+            </div>
+
+            <!-- Subject Selection Selector drop-down -->
+            <div class="flex items-center gap-3 w-full md:w-auto mt-2 md:mt-0">
+              <label for="workspace-subject-select" class="font-mono text-[10px] text-zinc-400 uppercase font-bold shrink-0">SELECT WORKLOAD:</label>
+              <select id="workspace-subject-select" class="flex-grow md:flex-grow-0 font-display text-xs font-bold uppercase tracking-wider py-2.5 px-3.5 border-2 border-black bg-white rounded-none cursor-pointer focus:border-brand-yellow">
+                <!-- Autopopulated from datastore arrays -->
+              </select>
+              
+              <!-- Exit Cockpit interface -->
+              <button onclick="exitInteractiveCockpit()" class="p-2 border border-zinc-300 hover:border-black cursor-pointer text-zinc-500 hover:text-black rounded-none bg-white transition-colors" title="Exit Cockpit">
+                <svg class="w-4.5 h-4.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Master Workspace Panels Layout grid -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            
+            <!-- LEFT MAIN COLUMN: Notes, Replicas, Chats tabs (7 columns spans) -->
+            <div class="lg:col-span-8 flex flex-col bg-white border border-zinc-200 shadow-sm rounded-none min-h-[580px]">
+              
+              <!-- Sub-tabs navigation buttons -->
+              <div class="flex border-b border-zinc-200 select-none bg-zinc-50/50">
+                <button id="cram-tab-notes" class="cram-sub-tab flex-1 py-3.5 text-center font-display text-xs font-black uppercase flex items-center justify-center gap-2 border-r border-zinc-200 cursor-pointer text-zinc-500 hover:bg-zinc-50 rounded-none">
+                  <svg class="w-4 h-4 shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"></path><path d="M6 6h10"></path></svg>
+                  Priority Notes
+                </button>
+                <button id="cram-tab-questions" class="cram-sub-tab flex-1 py-3.5 text-center font-display text-xs font-black uppercase flex items-center justify-center gap-2 border-r border-zinc-200 cursor-pointer text-zinc-500 hover:bg-zinc-50 rounded-none">
+                  <svg class="w-4 h-4 shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                  Replica Models
+                </button>
+                <button id="cram-tab-groups" class="cram-sub-tab flex-1 py-3.5 text-center font-display text-xs font-black uppercase flex items-center justify-center gap-2 cursor-pointer text-zinc-500 hover:bg-zinc-50 rounded-none">
+                  <svg class="w-4 h-4 shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                  Crash Chat <span class="bg-red-500 w-1.5 h-1.5 rounded-full inline-block animate-pulse"></span>
+                </button>
+              </div>
+
+              <!-- VIEW 01: Priority Notes Content list -->
+              <div id="cram-notes-view" class="p-5 sm:p-7 space-y-4">
+                <div class="bg-blue-50/50 p-4 border border-blue-100 flex gap-3 rounded-none mb-2">
+                  <svg class="w-5 h-5 text-blue-800 shrink-0 mt-0.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                  <div>
+                    <h5 class="font-display text-xs font-black uppercase text-blue-900 tracking-wider">PRIORITY CONDENSATIONS</h5>
+                    <p class="font-sans text-[11px] text-blue-700 leading-relaxed mt-0.5">Click "Reveal Formulation" to uncover hidden formulas and step justifications compiled instantly.</p>
+                  </div>
+                </div>
+                <div id="cram-flashcards-list" class="space-y-4">
+                  <!-- Autogenerated from index JS datastores -->
+                </div>
+              </div>
+
+              <!-- VIEW 02: Model Replicas Content list -->
+              <div id="cram-questions-view" class="p-5 sm:p-7 space-y-5 hidden">
+                <div class="bg-amber-50/50 p-4 border border-amber-150 flex gap-3 rounded-none mb-2">
+                  <svg class="w-5 h-5 text-amber-800 shrink-0 mt-0.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                  <div>
+                    <h5 class="font-display text-xs font-black uppercase text-amber-900 tracking-wider">HISTORIC CLONES</h5>
+                    <p class="font-sans text-[11px] text-amber-700 leading-relaxed mt-0.5">These exact structures have matched past exams up to 94% frequency. Toggle "Compare Model Answer" and analyze the red "Trap zones".</p>
+                  </div>
+                </div>
+                <div id="cram-questions-list" class="space-y-4">
+                  <!-- Autogenerated from index JS datastores -->
+                </div>
+              </div>
+
+              <!-- VIEW 03: Simulated Chats Room boards -->
+              <div id="cram-groups-view" class="p-5 sm:p-7 flex flex-col justify-between hidden h-[580px]">
+                <div class="flex flex-col gap-4 overflow-y-auto pr-2 pb-4 flex-grow border-b border-zinc-150 max-h-[410px]" id="cockpit-chat-feed">
+                  <!-- Messages injected dynamically -->
+                </div>
+
+                <!-- Input Chat submissions form -->
+                <form id="cockpit-chat-form" class="flex gap-2.5 mt-5">
+                  <input type="text" id="cockpit-chat-input" placeholder="Type structural question... (e.g. 'What is SJF preemption?' or 'Explain Hückel rule')" class="flex-grow p-3.5 border-2 border-black font-sans text-xs bg-white rounded-none focus:outline-none" required />
+                  <button type="submit" class="bg-black text-white px-6 font-display text-xs font-black uppercase hover:bg-neutral-800 cursor-pointer shadow-sm rounded-none">
+                    Send
+                  </button>
+                </form>
+              </div>
+
+            </div>
+
+            <!-- RIGHT COMPANION SIDEBAR: Focus block + Breath buffer (4 columns spans) -->
+            <div class="lg:col-span-4 space-y-6">
+              
+              <!-- 1. POMODORO DYNAMIC BLOCK TIMER -->
+              <div class="bg-white border-2 border-black p-6 shadow-sm rounded-none flex flex-col gap-5">
+                <div class="border-b border-zinc-150 pb-4 flex justify-between items-center select-none">
+                  <h4 class="font-display text-xs font-black uppercase tracking-wider text-black flex items-center gap-1.5 hover:opacity-90">
+                    <svg class="w-4 h-4 text-black shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                    Focus Sprint Timer
+                  </h4>
+                  <span class="font-mono text-[9px] font-black text-zinc-400 uppercase tracking-widest">ACTIVE SESSION</span>
+                </div>
+
+                <!-- Digital visual countdown text metrics -->
+                <div class="text-center py-6 select-all">
+                  <div id="timer-numbers-display" class="font-display text-[64px] font-black tracking-tighter text-black leading-none">25:00</div>
+                  <div class="font-mono text-[9px] text-zinc-400 uppercase tracking-widest mt-2 block font-extrabold">RETENTION WINDOW LIMIT CONTAINER</div>
+                </div>
+
+                <!-- Progress index bar -->
+                <div class="w-full bg-zinc-100 h-2 border border-zinc-200 rounded-none relative">
+                  <div id="timer-progress-bar" class="bg-brand-yellow h-full w-full transition-all duration-1000 ease-linear"></div>
+                </div>
+
+                <!-- Sprints interval Presets configurations -->
+                <div class="grid grid-cols-3 gap-1.5 select-none mt-2">
+                  <button data-time="10" class="timer-preset-btn font-mono text-[10px] font-bold uppercase tracking-wider text-black border border-zinc-300 hover:border-black px-2.5 py-1.5 cursor-pointer bg-white rounded-none">10 MIn</button>
+                  <button data-time="25" class="timer-preset-btn font-mono text-[10px] font-semibold uppercase tracking-wider text-black border border-black bg-zinc-100 px-2.5 py-1.5 cursor-pointer rounded-none">25 MIn</button>
+                  <button data-time="45" class="timer-preset-btn font-mono text-[10px] font-bold uppercase tracking-wider text-black border border-zinc-300 hover:border-black px-2.5 py-1.5 cursor-pointer bg-white rounded-none">45 MIn</button>
+                </div>
+
+                <!-- Play control trigger -->
+                <button id="timer-toggle-btn" class="w-full mt-2 font-display text-[11px] font-black uppercase py-4 bg-black text-white hover:bg-neutral-800 transition-colors cursor-pointer text-center flex items-center justify-center gap-2 rounded-none shadow-sm">
+                  <svg class="w-3.5 h-3.5 fill-brand-yellow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                  </svg>
+                  <span>Initiate Study Sprint</span>
+                </button>
+              </div>
+
+              <!-- 2. NEURO-CALMING BOX BREATHER -->
+              <div class="bg-white border border-zinc-200 p-6 shadow-sm rounded-none flex flex-col gap-5">
+                <div class="border-b border-zinc-150 pb-4 flex justify-between items-center select-none">
+                  <h4 class="font-display text-xs font-black uppercase tracking-wider text-black flex items-center gap-1.5">
+                    <svg class="w-4 h-4 text-black shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path><path d="M22 12H2"></path></svg>
+                    Autonomic Calm Regulator
+                  </h4>
+                  <span class="font-mono text-[9px] tracking-widest text-zinc-400 font-extrabold uppercase">SOLACE</span>
+                </div>
+
+                <!-- STATIC HOLD REGISTRY -->
+                <div id="breather-static-space" class="text-center py-6 select-none font-sans text-xs text-zinc-400 leading-relaxed">
+                  Experiencing chest tightness or mental speed limits? Box Breathing decreases high pulse rates within 3 minutes under severe stress conditions.
+                </div>
+
+                <!-- ACTIVE LIVE GUIDE ANCHOR -->
+                <div id="breather-active-space" class="hidden flex flex-col items-center py-6 select-none relative h-40 justify-center">
+                  <div id="breather-circle-bg" class="static w-20 h-20 bg-yellow-400/20 border-yellow-400 rounded-full flex items-center justify-center transition-all duration-1000"></div>
+                  <div class="absolute text-center z-10 w-full px-4">
+                    <span id="breather-seconds-display" class="font-mono text-2xl font-black text-black">4</span>
+                    <span class="font-mono text-[9px] text-zinc-400 uppercase tracking-widest block font-bold">SEC</span>
+                    <h5 id="breather-instructions-step" class="font-display text-xs font-black uppercase text-black mt-2">Inhale Deeply</h5>
+                    <span id="breather-instructions-subtext" class="font-sans text-[10px] text-zinc-400 leading-none">Fill your lungs calmly</span>
+                  </div>
+                </div>
+
+                <!-- Activation controls -->
+                <button id="breather-toggle-btn" class="w-full font-display text-xs font-bold uppercase py-3.5 bg-white text-black border-2 border-dashed border-black hover:bg-neutral-50 cursor-pointer text-center rounded-none shadow-xs">
+                  Activate Box Breathing
+                </button>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-white border-t border-zinc-200 py-10 px-4 md:px-8 shrink-0 w-full mt-auto">
+      <div class="max-w-[1120px] mx-auto flex flex-col sm:flex-row justify-between items-center gap-6 w-full">
+        <div class="text-xs text-zinc-400 font-mono">
+          LastMinute © 2026. SECURING BASELINES UNDER EXTREME DEADLINES.
+        </div>
+        <div class="flex items-center gap-6">
+          <a href="index.html" class="font-mono text-xs uppercase text-zinc-505 hover:text-black">Home</a>
+          <a href="about.html" class="font-mono text-xs uppercase text-zinc-505 hover:text-black"> स्टोरी</a>
+          <a href="services.html" class="font-mono text-xs uppercase text-zinc-505 hover:text-black">Cabin</a>
+          <a href="contact.html" class="font-mono text-xs uppercase text-zinc-505 hover:text-black">Help</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Master Controller -->
+    <script type="module" src="/script.js"></script>
+  </body>
+</html>

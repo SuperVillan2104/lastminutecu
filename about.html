@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About | LastMinute — Story behind the Academic Rescue Station</title>
+    <!-- Master styles compiled by Vite -->
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body class="min-h-screen bg-brand-surface font-sans text-brand-dark flex flex-col antialiased">
+    
+    <!-- Hidden Page Identifier -->
+    <div id="view-about-indicator" class="hidden"></div>
+
+    <!-- DYNAMIC COUNTDOWN BANNER -->
+    <div id="countdown-banner" class="bg-black text-white w-full py-2 px-4 text-center border-b border-zinc-900 sticky top-0 z-50">
+      <span class="font-mono text-[11px] tracking-widest uppercase flex items-center justify-center gap-2">
+        <svg class="w-3.5 h-3.5 text-brand-yellow inline animate-pulse" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path>
+          <line x1="12" y1="9" x2="12" y2="13"></line>
+          <line x1="12" y1="17" x2="12.01" y2="17"></line>
+        </svg>
+        <span id="banner-text">T-MINUS 47:59:58 UNTIL EXAM DEADLINE</span>
+      </span>
+    </div>
+
+    <!-- MAIN NAV HEADER -->
+    <header class="bg-white/95 backdrop-blur-md border-b border-zinc-200 h-16 w-full shadow-xs sticky top-9 z-40">
+      <div class="flex justify-between items-center max-w-[1120px] mx-auto px-4 sm:px-6 md:px-8 h-full">
+        <!-- Logo -->
+        <a href="index.html" id="nav-logo" class="font-display text-lg md:text-xl font-black text-brand-dark uppercase tracking-tighter flex items-center gap-2 hover:opacity-90">
+          <svg class="w-5.5 h-5.5 text-brand-yellow fill-brand-yellow shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+          </svg>
+          <span>LastMinute</span>
+        </a>
+
+        <!-- Desktop Navigation Menu -->
+        <nav class="hidden md:flex items-center gap-8 h-full">
+          <a href="index.html" class="h-full flex items-center font-display text-[12px] font-bold uppercase text-zinc-500 border-b-2 border-transparent hover:text-black transition-colors">Home</a>
+          <a href="about.html" class="h-full flex items-center font-display text-[12px] font-extrabold uppercase relative px-1 border-b-2 text-brand-yellow-hover border-brand-yellow">Crew Story</a>
+          <a href="services.html" class="h-full flex items-center font-display text-[12px] font-bold uppercase text-zinc-500 border-b-2 border-transparent hover:text-black transition-colors">Study Cabin</a>
+          <a href="contact.html" class="h-full flex items-center font-display text-[12px] font-bold uppercase text-zinc-500 border-b-2 border-transparent hover:text-black transition-colors">Get Help</a>
+        </nav>
+
+        <!-- CTA Action -->
+        <div class="hidden md:block">
+          <a href="services.html?tab=cockpit" class="font-display text-xs font-black uppercase px-5 py-2.5 border-2 border-black bg-brand-yellow text-black hover:bg-brand-yellow-hover transition-all active:scale-97 flex items-center gap-2 cursor-pointer shadow-sm">
+            <span>Enter Cram Cockpit</span>
+            <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+        </div>
+
+        <!-- Mobile Toggle -->
+        <div class="flex md:hidden items-center gap-2">
+          <a href="services.html?tab=cockpit" class="bg-brand-yellow text-black font-display font-black text-[11px] uppercase border border-black px-3.5 py-1.5 active:scale-95 shadow-sm">Cram</a>
+          <button id="mobile-menu-toggle" class="text-black p-2 border border-zinc-200 focus:outline-none cursor-pointer rounded-none" aria-label="Toggle menu">
+            <svg id="menu-icon-hamburger" class="w-5 h-5 block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            <svg id="menu-icon-close" class="w-5 h-5 hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- MOBILE DRAWER CONTAINER -->
+    <div id="mobile-drawer" class="hidden md:hidden bg-white border-b border-zinc-200 w-full py-5 px-6 flex flex-col gap-4 shadow-md absolute top-25 left-0 z-40 animate-fade-in">
+      <div class="flex flex-col gap-2">
+        <a href="index.html" class="font-display text-xs font-bold uppercase py-2.5 px-3 border-l-4 border-transparent text-zinc-505 hover:text-black">Home</a>
+        <a href="about.html" class="font-display text-xs font-black uppercase py-2.5 px-3 border-l-4 border-brand-yellow bg-zinc-50 text-black">Crew Story</a>
+        <a href="services.html" class="font-display text-xs font-bold uppercase py-2.5 px-3 border-l-4 border-transparent text-zinc-505 hover:text-black">Study Cabin</a>
+        <a href="contact.html" class="font-display text-xs font-bold uppercase py-2.5 px-3 border-l-4 border-transparent text-zinc-505 hover:text-black">Get Help</a>
+      </div>
+      <a href="services.html?tab=cockpit" class="w-full bg-brand-yellow text-black border-2 border-black font-display text-xs font-black py-4 uppercase text-center flex items-center justify-center gap-2 cursor-pointer transition-colors shadow-sm">
+        Enter Cram Cockpit 
+        <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+      </a>
+    </div>
+
+    <!-- MAIN SEGMENT -->
+    <main class="flex-grow w-full">
+      <div class="flex flex-col items-center w-full max-w-[1120px] mx-auto px-4 sm:px-6 md:px-8 py-16 md:py-24 gap-12 md:gap-16">
+        
+        <!-- Opening Editorial Header -->
+        <section class="w-full max-w-3xl flex flex-col gap-6 text-center items-center">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 bg-white border border-zinc-200 rounded-none shadow-xs">
+            <span class="font-mono text-[10px] font-black text-zinc-550 uppercase tracking-widest">
+              Origin Document // Chapter 01
+            </span>
+          </div>
+          <h1 class="font-display text-3xl sm:text-4xl md:text-5xl font-black text-black tracking-tight uppercase leading-none mt-4">
+            The Story Behind the Panic.
+          </h1>
+          <p class="font-sans text-sm sm:text-base md:text-lg text-zinc-600 max-w-2xl leading-relaxed">
+            We didn't set up this project because we were flawless schedulers with perfect 4.0 GPAs. We designed it because we spent countless midterms staring in panic at empty desks at 3:00 AM, desperate for a clean, filtered path to surviving tomorrow's test.
+          </p>
+        </section>
+
+        <!-- Dynamic Illustration Aspect Block -->
+        <div class="w-full h-64 sm:h-80 md:h-[440px] bg-white border border-zinc-200 overflow-hidden relative group shadow-sm z-10">
+          <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-102"
+            style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDu-hZML02xLbDdFfQCcG4lElZeqa5wOJDRu3DxjJ2gZeLl6N8MOocCHYn2xsnfUL_hQRASLeGx05Eaqw1ax5cq8VZcU05IpkS100yo9rWJpe62IyKSKRbY-86DJacfEObmE8Yf_otLx4kW_BlT_WjmSdSDvVJPAMgPBDFxkY5VaO07rSLd1JVvmsGKk7_zIqjQzsVWX8WW7fK-6rcfzFO4B2iJcKETwW4-ddJQZLK9BZkRm9RIzEVHuFGSUhpFqUukHOsyB3JOTyw');">
+          </div>
+          <div class="absolute inset-0 bg-zinc-950/15 mix-blend-multiply"></div>
+          <div class="absolute bottom-5 right-5 bg-white px-4 py-2 border border-black text-black font-mono text-[10px] font-black tracking-widest uppercase shadow-md rounded-none">
+            WORKSPACE STUDY STATION // CONFIDENTIAL
+          </div>
+        </div>
+
+        <!-- Editorial Copy Narrative Columns -->
+        <section class="w-full max-w-3xl flex flex-col gap-12 text-left">
+          <div class="flex flex-col gap-6">
+            <h2 class="font-display text-lg sm:text-xl md:text-2xl font-black text-black uppercase">
+              The Illusion of Continuous Study Time
+            </h2>
+            <p class="font-sans text-xs sm:text-sm text-zinc-650 leading-relaxed">
+              Every term kicks off with the exact same optimistic promise: "This year, I am building summaries, organizing folders, and studying 1 hour every single evening." But reality hits. Deadlines clash, personal schedules slide, work piles on, and suddenly you are facing 48 hours to midterms with zero compiled materials.
+            </p>
+            <p class="font-sans text-xs sm:text-sm text-zinc-650 leading-relaxed">
+              The problem isn't a lack of info. Traditional systems try to solve pressure by dumping 500 pages of theoretical logs, side explanations, and historical footnotes onto struggling brains. Urgency demands a different compiler—a high-yield filter that slices through standard textbook fluff to leave you with only the formulas, proofs, and models that actually secure passing grades on exam papers.
+            </p>
+          </div>
+
+          <!-- Graphic quote block combo -->
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-5 w-full border-t border-zinc-200 pt-8">
+            <div class="md:col-span-8 bg-white border-2 border-black p-6 sm:p-10 flex flex-col justify-between gap-6 relative shadow-md rounded-none">
+              <svg class="w-8 h-8 text-zinc-200 absolute top-4 left-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3a4 4 0 0 0-4 4v3a3 3 0 0 0 3 3h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1M6 3a4 4 0 0 0-4 4v3a3 3 0 0 0 3 3h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5"></path></svg>
+              <blockquote class="font-display text-sm sm:text-base md:text-md font-bold text-black relative z-10 leading-snug pl-6">
+                "When you have less than 48 hours to final grades, aesthetic gradients and motivational text won't help you construct a CPU scheduling sequence. Flat, structured, zero-fluff core logic does."
+              </blockquote>
+              <cite class="font-mono text-[10px] text-zinc-450 not-italic mt-4 block border-t border-zinc-100 pt-4 pl-6 font-bold uppercase tracking-wider">
+                — LastMinute Engineering Crew
+              </cite>
+            </div>
+
+            <div class="md:col-span-4 flex flex-col gap-2">
+              <div class="flex-grow bg-white border border-zinc-200 p-4 flex flex-col justify-center items-center text-center gap-1 shadow-xs rounded-none">
+                <span class="font-display text-3xl font-black text-black">-87%</span>
+                <span class="font-mono text-[9px] text-zinc-400 uppercase tracking-widest font-bold">
+                  Syllabus Overhead Slashed
+                </span>
+              </div>
+              <div class="flex-grow bg-brand-yellow border-2 border-black p-4 flex flex-col justify-center items-center text-center gap-1 shadow-sm rounded-none">
+                <span class="font-display text-3xl font-black text-black">100%</span>
+                <span class="font-mono text-[9px] text-zinc-800 uppercase tracking-widest font-extrabold">
+                  Targeted Density focus
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex flex-col gap-6">
+            <h2 class="font-display text-lg sm:text-xl md:text-2xl font-black text-black uppercase">
+              The Mission: Speed and Force Over Completeness
+            </h2>
+            <p class="font-sans text-xs sm:text-sm text-zinc-650 leading-relaxed">
+              LastMinute is intentionally built flat, clean, and styled with high contrast slate panels. We don't try to teach you the philosophy of the subjects. We strive to give your brain the precise structures that secure marks. Every pixel on this platform is optimized strictly to prevent exam panic and simplify mental compilation.
+            </p>
+            <div class="border-l-4 border-black pl-5 py-3 my-4 bg-zinc-50 border-r border-y border-zinc-200 shadow-xs">
+              <p class="font-sans text-xs sm:text-sm text-zinc-600 italic leading-relaxed">
+                Perfect academic completion is the absolute enemy of securing standard baselines in emergency timeline windows. Pick your course load, memorize the key invariants, review past models, and survive.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Dynamic Action Navigation Block -->
+        <section class="w-full max-w-2xl text-center py-10 border-t border-zinc-200 mt-8 flex flex-col items-center gap-6">
+          <h3 class="font-display text-sm sm:text-base md:text-lg font-black text-black uppercase">
+            Enough reading. Step inside the study cabin.
+          </h3>
+          <a href="services.html?tab=cockpit" class="font-display text-xs font-black uppercase bg-black text-white hover:bg-zinc-805 transition-all px-8 py-4.5 border-2 border-black active:scale-95 flex items-center gap-2.5 shadow-md rounded-none">
+            Initiate Cram Session
+            <svg class="w-4.5 h-4.5 text-brand-yellow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+        </section>
+
+      </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-white border-t border-zinc-200 py-10 px-4 md:px-8 shrink-0 w-full mt-auto">
+      <div class="max-w-[1120px] mx-auto flex flex-col sm:flex-row justify-between items-center gap-6 w-full">
+        <div class="text-xs text-zinc-400 font-mono">
+          LastMinute © 2026. SECURING BASELINES UNDER EXTREME DEADLINES.
+        </div>
+        <div class="flex items-center gap-6">
+          <a href="index.html" class="font-mono text-xs uppercase text-zinc-505 hover:text-black">Home</a>
+          <a href="about.html" class="font-mono text-xs uppercase text-zinc-505 hover:text-black"> स्टोरी</a>
+          <a href="services.html" class="font-mono text-xs uppercase text-zinc-505 hover:text-black">Cabin</a>
+          <a href="contact.html" class="font-mono text-xs uppercase text-zinc-505 hover:text-black">Help</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Master script -->
+    <script type="module" src="/script.js"></script>
+  </body>
+</html>

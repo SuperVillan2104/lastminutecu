@@ -1,0 +1,6 @@
+{
+  "name": "LastMinute",
+  "description": "An essentialist exam preparation platform designed for deep focus, rapid recall, and targeted cram sessions when you have less than 48 hours to the deadline.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
